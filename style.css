@@ -1,3 +1,10 @@
 body {
-    font-family: system-ui; /* in the real world, often used with several fallbacks */
+  font-family: system-ui; /* in the real world, often used with several fallbacks */
+}
+
+form {
+  border: 1px solid #bbb;
+  border-radius: 10px;
+  margin: 1em 0;
+  padding: 1em;
 }

@@ -1,32 +1,39 @@
 <!doctype html>
 <html lang="en-US">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Fetching Data</title>
-        <link rel="stylesheet" href="style.css" />
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <script type="module" src="script.js"></script>
-    </head>
-    <body>
-        <h1>Fetching Data</h1>
-        <h2>XMLHttpRequest (XHR) - original, built-in</h2>
-        <button id="xhr-button">Fetch Data</button>
-        <button id="xhr-server-error-button">Fetch Data (server error)</button>
-        <button id="xhr-error-button">Fetch Data (network error)</button>
-        <button id="xhr-slow-button">Fetch Data (slow)</button>
-        <h2>Fetch API - modern, built-in</h2>
-        <button id="fetch-button">
-            Fetch Data using Fetch API (modern, built-in)
-        </button>
-        <h2>Axios - modern, popular library</h2>
-        <button id="axios-button">
-            Fetch Data using Axios (modern, library)
-        </button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fetching Data</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-        <hr />
+    <script type="module" src="script.js"></script>
+  </head>
 
-        <div id="progress">Ready.</div>
-        <div id="result"></div>
-    </body>
+  <body>
+    <h1>Fetching Data</h1>
+
+    <form>
+      <input name="first-name" />
+      <button>Send Information</button>
+    </form>
+
+    <button id="the-button">Click Me!</button>
+    <button id="clear-button">Clear</button>
+
+    <h2>XMLHTTPRequest (XHR)</h2>
+    <button id="xhr-button">Send XHR Request</button>
+
+    <h2>Fetch API</h2>
+    <button id="fetch-button">Send Fetch Request</button>
+    <button id="axios-button">Send Axios Request</button>
+
+    <button id="fetch-with-promise-button">
+      Send Fetch Request (with Promise)
+    </button>
+
+    <hr />
+
+    <div id="result"></div>
+  </body>
 </html>

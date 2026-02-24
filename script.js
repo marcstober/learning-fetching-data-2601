@@ -1,95 +1,105 @@
-console.log("Loading JS")
+console.log("Loading JS");
 
-const xhrButton = document.getElementById("xhr-button")
-const xhrServerErrorButton = document.getElementById("xhr-server-error-button")
-const xhrErrorButton = document.getElementById("xhr-error-button")
-const xhrSlowButton = document.getElementById("xhr-slow-button")
-
-const fetchButton = document.getElementById("fetch-button")
-const axiosButton = document.getElementById("axios-button")
-const resultDiv = document.getElementById("result")
-const progressDiv = document.getElementById("progress")
-
-// const url = "https://jsonplaceholder.typicode.com/todos" // Copilot suggestion - TODO: try it?
-const url = "https://dummyjson.com/todos"
-
-xhrButton.addEventListener("click", () => {
-    startXHRRequest(url)
-})
-
-xhrServerErrorButton.addEventListener("click", () => {
-    startXHRRequest(url + "badurl")
-})
-
-xhrErrorButton.addEventListener("click", () => {
-    startXHRRequest("http://invalid-url") // intentionally invalid URL to trigger network error
-})
-
-xhrSlowButton.addEventListener("click", () => {
-    startXHRRequest(url + "?delay=5000")
-})
-
-function startXHRRequest(url) {
-    progressDiv.textContent = "Loading..."
-
-    const xhr = new XMLHttpRequest()
-    xhr.open("GET", url) // doesn't actually "open" it, just gets it ready
-
-    // set up event handlers
-    xhr.onload = () => {
-        if (xhr.status === 200) {
-            const data = JSON.parse(xhr.responseText)
-            displayData(data)
-        } else {
-            progressDiv.textContent = `❌ Server error occurred: ${xhr.status} ${xhr.statusText}`
-        }
-    }
-
-    xhr.onerror = () => {
-        progressDiv.textContent = "❌ Network error occurred!"
-        // the browser doesn't give us much more information, ostensibly for security reasons
-    }
-
-    xhr.onprogress = (event) => {
-        progressDiv.textContent = `${event.loaded} / ${event.total} bytes received`
-    }
-
-    // actually send the request here
-    xhr.send()
-}
-
-fetchButton.addEventListener("click", () => {
-    progressDiv.textContent = "Loading..."
-
-    fetch(url)
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error("Network response was not ok")
-            }
-            return response.json()
-        })
-        .then((data) => displayData(data))
-        .catch((error) =>
-            console.error("Error fetching data with Fetch API:", error)
-        )
-})
+const theButton = document.getElementById("the-button");
+const clearButton = document.getElementById("clear-button");
+const xhrButton = document.getElementById("xhr-button");
+const fetchButton = document.getElementById("fetch-button");
+const axiosButton = document.getElementById("axios-button");
+const fetchWithPromiseButton = document.getElementById(
+  "fetch-with-promise-button",
+);
 
 axiosButton.addEventListener("click", () => {
-    progressDiv.textContent = "Loading..."
-
-    axios
-        .get(url)
-        .then((response) => displayData(response.data))
-        .catch((error) =>
-            console.error("Error fetching data with Axios:", error)
-        )
-})
-
-function displayData(data) {
-    resultDiv.innerHTML = ""
-    data.forEach((item) => {
-        const p = document.createElement("p")
-        p.textContent = `ID: ${item.id}, Title: ${item.title}`
-        resultDiv.appendChild(p)
+  console.log(axios);
+  axios
+    .get("https://dummyjson.com/todos")
+    .then(function (response) {
+      // handle success
+      console.log(response);
     })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
+    .finally(function () {
+      // always executed
+    });
+});
+
+const result = document.getElementById("result");
+
+theButton.addEventListener("click", () => {
+  writeMessage("You clicked the button!");
+
+  //   setInterval(() => {
+  setTimeout(() => {
+    // callback function
+    writeMessage("A. This comes after!");
+  }, 0);
+  // message A still comes after message B (even with 0 ms timeout!)
+
+  writeMessage("B. This message comes next!");
+});
+
+clearButton.addEventListener("click", () => {
+  result.textContent = "";
+});
+
+xhrButton.addEventListener("click", () => {
+  writeMessage("You clicked the XHR button");
+
+  let req = new XMLHttpRequest();
+
+  // sets up the request, doesn't really "open" it
+  req.open("GET", "https://dummyjson.com/todos");
+
+  req.addEventListener("load", () => {
+    console.log(req.responseText);
+    let data = JSON.parse(req.responseText);
+    console.log(data);
+    displayTodos(data.todos);
+  });
+
+  req.send();
+});
+
+fetchButton.addEventListener("click", async function () {
+  // not actually blocking
+  const resp = await fetch("https://dummyjson.com/todos?delay=2000");
+
+  const data = await resp.json();
+
+  displayTodos(data.todos);
+});
+
+fetchWithPromiseButton.addEventListener("click", function () {
+  // resp is going to be a Promise
+  const resp = fetch("https://dummyjson.com/todos?delay=500");
+
+  resp.then((result) => {
+    // JavaScript Object Notation
+    // Note that .json() returns the **objects** not the JSON text.
+    result.json().then((data) => {
+      displayTodos(data.todos);
+    });
+  });
+
+  console.log(resp); // without "await"
+
+  //   const data = await resp.json();
+
+  //   displayTodos(data.todos);
+});
+
+// refactored by extracting code into a function:
+function writeMessage(msg) {
+  let p = document.createElement("p");
+  p.textContent = msg;
+  result.appendChild(p);
+}
+
+function displayTodos(todos) {
+  todos.forEach((todo) => {
+    writeMessage(`${todo.completed ? "✅" : "⏹️"} ${todo.todo}`);
+  });
 }
