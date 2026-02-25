@@ -1,34 +1,48 @@
 <!doctype html>
 <html lang="en-US">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Fetching Data</title>
-        <link rel="stylesheet" href="style.css" />
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <script type="module" src="script.js"></script>
-    </head>
-    <body>
-        <h1><span class="text-gradient">Fetching Data</span></h1>
-        <button id="timeout-button">Click Me!</button>
-        <button id="clear-button">Clear</button>
-        <h2>XMLHttpRequest (XHR) - original, built-in</h2>
-        <button id="xhr-button">Fetch Data</button>
-        <button id="xhr-server-error-button">Fetch Data (server error)</button>
-        <button id="xhr-error-button">Fetch Data (network error)</button>
-        <button id="xhr-slow-button">Fetch Data (slow)</button>
-        <h2>Fetch API - modern, built-in</h2>
-        <button id="fetch-button">
-            Fetch Data using Fetch API (modern, built-in)
-        </button>
-        <h2>Axios - modern, popular library</h2>
-        <button id="axios-button">
-            Fetch Data using Axios (modern, library)
-        </button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fetching Data</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type="module" src="script.js"></script>
+  </head>
+  <body>
+    <h1><span class="text-gradient">Fetching Data</span></h1>
+    <button id="timeout-button">Click Me!</button>
+    <button id="clear-button">Clear</button>
+    <h2>XMLHttpRequest (XHR): original, built-in</h2>
+    <button id="xhr-button">Fetch Data</button>
+    <button id="xhr-server-error-button">Fetch Data (server error)</button>
+    <button id="xhr-error-button">Fetch Data (network error)</button>
+    <button id="xhr-progress-button">Fetch Data (progress)</button>
+    <button id="xhr-timeout-button">Fetch Data (timeout)</button>
+    <h2>Fetch API: modern, built-in</h2>
+    <button id="fetch-button">Fetch Data using Fetch API (async/await)</button>
+    <button id="fetch-with-promise-button">
+      Fetch Data using Fetch API (Promise with callback)
+    </button>
+    <h2>Axios: modern, popular library</h2>
 
-        <hr />
+    <details id="axios-details">
+      <summary></summary>
+      <p>
+        Axios provides a DX (developer experience) like the Fetch API, with
+        backward compatability and some other features that require
+        XMLHttpRequest, plus some additional features. In addition, it's
+        isomorphic, meaning it works the same in both the browser and in
+        server-side JS code (e.g., Node.js).
+      </p>
+    </details>
 
-        <div id="progress">Ready.</div>
-        <div id="result"></div>
-    </body>
+    <button id="axios-button">Fetch Data using Axios</button>
+
+    <p>[Error, progress, timeout, etc. buttons for Axios could go here.]</p>
+
+    <hr />
+
+    <div id="progress">Ready.</div>
+    <div id="result"></div>
+  </body>
 </html>
