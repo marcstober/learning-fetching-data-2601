@@ -149,7 +149,10 @@ axiosButton.addEventListener("click", () => {
 
   axios
     .get(url)
-    .then((response) => displayTodos(response.data.todos))
+    .then((response) => {
+      progressDiv.textContent = "Data received, processing...";
+      displayTodos(response.data.todos);
+    })
     .catch((error) => console.error("Error fetching data with Axios:", error));
 });
 

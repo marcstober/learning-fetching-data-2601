@@ -27,6 +27,11 @@ body {
 #axios-details summary {
   position: absolute;
   z-index: 1; /* otherwise absolute puts the marker behind the content and you can't click it */
+  list-style-type: "\2795"; /* heavy plus sign, to go with heavy minus sign... */
+}
+
+#axios-details[open] > summary {
+  list-style-type: "\2796"; /* heavy minus sign, looks better than the down-pointing marker when open and there's only one line */
 }
 
 #axios-details:not([open]) summary {
@@ -61,5 +66,5 @@ body {
 
 #axios-details p {
   margin-top: 0;
-  margin-left: 1.3em;
+  margin-left: 1.5em;
 }
