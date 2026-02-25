@@ -1,3 +1,18 @@
 body {
     font-family: system-ui; /* in the real world, often used with several fallbacks */
 }
+
+/* just for fun */
+.text-gradient {
+    /* Gradient text effect adapted from: 
+        https://www.w3schools.in/css3/gradient-text, https://csstextgradient.com/ */
+    display: inline; /* make gradient only as wide as text content - technique from GitHub Copilot*/
+    background: linear-gradient(60deg, #6e87f7, #543573);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+#progress {
+    font-style: italic;
+}
