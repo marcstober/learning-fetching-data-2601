@@ -17,54 +17,19 @@ body {
   font-style: italic;
 }
 
-/* this rest is totally unecessary, but I got carried away playing with CSS */
-
 #axios-details {
-  /* old trick to make a child use this as parent width when setting width 100% (prevents horizonal scroll) */
-  position: relative;
+  margin: 0 1em 1.5em;
 }
 
 #axios-details summary {
-  position: absolute;
-  z-index: 1; /* otherwise absolute puts the marker behind the content and you can't click it */
-  list-style-type: "\2795"; /* heavy plus sign, to go with heavy minus sign... */
+  width: fit-content;
+  margin-top: -0.4em;
+  padding: 0.4em 1em 0.6em;
+}
+#axios-details summary:hover {
+  background-color: #ddd;
 }
 
-#axios-details[open] > summary {
-  list-style-type: "\2796"; /* heavy minus sign, looks better than the down-pointing marker when open and there's only one line */
-}
-
-#axios-details:not([open]) summary {
-  /* this lets you click anywhere top open when it's closed, don't do this when it's open 
-        because it would interfere with normal clicking on the content such as to select */
-  width: 100%;
-}
-
-#axios-details:not([open])::details-content {
-  /* This is the critical bit to make the closed state show (part of) the open state, new CSS feature: 
-        https://stackoverflow.com/questions/69442857/display-contents-of-details-when-summary-is-closed */
-  content-visibility: visible;
-
-  white-space: nowrap;
-  overflow-x: hidden;
-  mask-image: linear-gradient(to right, black 80%, transparent);
-
-  transition: transform 0.2s ease;
-}
-
-#axios-details:hover summary,
-#axios-details:not([open]):hover p {
-  /* affordance */
-  transform: translateX(2px);
-}
-
-#axios-details[open]::details-content {
-  white-space: normal;
-  overflow: visible;
-  mask-image: none;
-}
-
-#axios-details p {
-  margin-top: 0;
-  margin-left: 1.5em;
+#axios-details > p:first-of-type {
+  margin-top: 0.5em;
 }
