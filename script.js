@@ -35,9 +35,13 @@ timeoutButton.addEventListener("click", () => {
   writeMessage("B. This message comes next!");
 });
 
-clearButton.addEventListener("click", () => {
+function clear() {
+  progressDiv.textContent = "Ready.";
   resultDiv.textContent = "";
-});
+}
+clear();
+
+clearButton.addEventListener("click", clear);
 
 xhrButton.addEventListener("click", () => {
   startXHRRequest(url);
@@ -63,9 +67,8 @@ xhrProgressButton.addEventListener("click", () => {
 
 xhrTimeoutButton.addEventListener("click", () => {
   alert(
-    "🚧 This should be an example of a request timing out " +
-      "using the timeout features XMLHttpRequest, " +
-      "but this example isn't finished yet."
+    "🚧 This should be an example of a request timing out, " +
+      "but this example isn't finished yet, so it's just slow."
   );
   startXHRRequest(url + "?delay=5000");
 });

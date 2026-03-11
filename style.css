@@ -33,3 +33,12 @@ body {
 #axios-details > p:first-of-type {
   margin-top: 0.5em;
 }
+
+.under-construction {
+  font-style: italic;
+}
+
+.under-construction::before {
+  content: "🚧 ";
+  font-style: normal; /* cancel italics for the emoji */
+}
